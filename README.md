@@ -1,5 +1,7 @@
 # cli-candlestick-chart
 
+[![CI](https://github.com/Julien-R44/cli-candlestick-chart/actions/workflows/rust.yml/badge.svg)](https://github.com/Julien-R44/cli-candlestick-chart/actions/workflows/rust.yml)
+
 This module allows you to display candle charts directly in your terminal. 
 
 I did this project mainly to learn Rust, so the code is may be not very good at some places.
