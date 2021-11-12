@@ -15,6 +15,15 @@ pub enum CandleType {
 }
 
 impl Candle {
+    pub fn new(open: f64, high: f64, low: f64, close: f64) -> Candle {
+        Candle {
+            open,
+            high,
+            low,
+            close,
+        }
+    }
+
     pub fn get_type(&self) -> CandleType {
         match self.open < self.close {
             true => CandleType::BULLISH,
