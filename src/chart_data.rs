@@ -30,7 +30,7 @@ impl ChartData {
     }
 
     pub fn set_candles(&mut self, candles: Vec<Candle>) {
-        self.candles = candles.clone();
+        self.candles = candles;
         self.compute_min_and_max_values();
         self.compute_variation();
         self.compute_average();

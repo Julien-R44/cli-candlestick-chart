@@ -10,11 +10,12 @@ pub struct Candle {
 }
 
 pub enum CandleType {
-    BEARISH,
-    BULLISH,
+    Bearish,
+    Bullish,
 }
 
 impl Candle {
+    #[allow(dead_code)]
     pub fn new(open: f64, high: f64, low: f64, close: f64) -> Candle {
         Candle {
             open,
@@ -26,8 +27,8 @@ impl Candle {
 
     pub fn get_type(&self) -> CandleType {
         match self.open < self.close {
-            true => CandleType::BULLISH,
-            false => CandleType::BEARISH,
+            true => CandleType::Bullish,
+            false => CandleType::Bearish,
         }
     }
 }
@@ -54,7 +55,7 @@ impl Chart {
         }
     }
 
-    pub fn draw(&self) -> () {
+    pub fn draw(&self) {
         self.renderer.render(self);
     }
 }

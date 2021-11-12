@@ -44,6 +44,6 @@ impl InfoBar {
             price = format!("{:.2}", self.chart_data.last_price).green().bold(),
         );
 
-        return output_str;
+        output_str
     }
 }

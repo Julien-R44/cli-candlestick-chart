@@ -1,5 +1,4 @@
 use std::error::Error;
-use terminal_size::{terminal_size, Height, Width};
 
 mod chart;
 use chart::*;
@@ -14,7 +13,6 @@ mod chart_data;
 use chart_data::*;
 
 mod info_bar;
-use info_bar::*;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let mut rdr = csv::Reader::from_path("AAPL.csv")?;

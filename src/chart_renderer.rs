@@ -36,12 +36,10 @@ impl ChartRenderer {
                 } else {
                     output = ChartRenderer::UNICODE_HALF_BODY_BOTTOM;
                 }
-            } else {
-                if (high_y - height_unit) > 0.75 {
-                    output = ChartRenderer::UNICODE_WICK;
-                } else if (high_y - height_unit) > 0.25 {
-                    output = ChartRenderer::UNICODE_UPPER_WICK;
-                }
+            } else if (high_y - height_unit) > 0.75 {
+                output = ChartRenderer::UNICODE_WICK;
+            } else if (high_y - height_unit) > 0.25 {
+                output = ChartRenderer::UNICODE_UPPER_WICK;
             }
         } else if max_y.floor() >= height_unit && height_unit >= min_y.ceil() {
             output = ChartRenderer::UNICODE_BODY;
@@ -54,19 +52,17 @@ impl ChartRenderer {
                 } else {
                     output = ChartRenderer::UNICODE_HALF_BODY_TOP;
                 }
-            } else {
-                if low_y - height_unit < 0.25 {
-                    output = ChartRenderer::UNICODE_WICK;
-                } else if low_y - height_unit < 0.75 {
-                    output = ChartRenderer::UNICODE_LOWER_WICK;
-                }
+            } else if low_y - height_unit < 0.25 {
+                output = ChartRenderer::UNICODE_WICK;
+            } else if low_y - height_unit < 0.75 {
+                output = ChartRenderer::UNICODE_LOWER_WICK;
             }
         }
 
         let candle_type = candle.get_type();
         match candle_type {
-            CandleType::BULLISH => output.to_string().green().to_string(),
-            CandleType::BEARISH => output.to_string().red().to_string(),
+            CandleType::Bullish => output.to_string().green().to_string(),
+            CandleType::Bearish => output.to_string().red().to_string(),
         }
     }
 
