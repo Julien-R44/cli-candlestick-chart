@@ -1,8 +1,8 @@
 use crate::chart_data::ChartData;
 
 pub struct YAxis {
+    pub width: i64,
     chart_data: ChartData,
-    width: i64,
     margin_right: i64,
     max_len_characteristic: i64,
 }
@@ -12,11 +12,13 @@ impl YAxis {
         let cloned_chart_data = chart_data.clone();
 
         let max_len_characteristic = chart_data.max_value.ceil().to_string().len() as i64;
+        let precision = 2;
+        let margin_right = 4;
 
         YAxis {
             chart_data: cloned_chart_data,
-            width: 5,
-            margin_right: 4,
+            width: max_len_characteristic + precision + 1 + 3 + margin_right,
+            margin_right,
             max_len_characteristic,
         }
     }

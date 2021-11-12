@@ -13,8 +13,11 @@ use y_axis::*;
 mod chart_data;
 use chart_data::*;
 
+mod info_bar;
+use info_bar::*;
+
 fn main() -> Result<(), Box<dyn Error>> {
-    let mut rdr = csv::Reader::from_path("TSLA.csv")?;
+    let mut rdr = csv::Reader::from_path("AAPL.csv")?;
 
     let mut candles: Vec<Candle> = Vec::new();
 

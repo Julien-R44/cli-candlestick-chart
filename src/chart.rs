@@ -1,4 +1,4 @@
-use crate::{ChartData, ChartRenderer, YAxis};
+use crate::{info_bar::InfoBar, ChartData, ChartRenderer, YAxis};
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize, Clone)]
@@ -27,6 +27,7 @@ pub struct Chart {
     pub renderer: ChartRenderer,
     pub y_axis: YAxis,
     pub chart_data: ChartData,
+    pub info_bar: InfoBar,
 }
 
 impl Chart {
@@ -34,11 +35,13 @@ impl Chart {
         let renderer = ChartRenderer::new();
         let chart_data = ChartData::new(candles);
         let y_axis = YAxis::new(&chart_data);
+        let info_bar = InfoBar::new("APPLE".to_string(), &chart_data);
 
         Chart {
             renderer,
             y_axis,
             chart_data,
+            info_bar,
         }
     }
 
