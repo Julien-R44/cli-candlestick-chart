@@ -1,5 +1,3 @@
-use std::num::Wrapping;
-
 use crate::{
     candle_set::CandleSet, chart::Candle, chart_renderer::ChartRenderer, info_bar::InfoBar, YAxis,
 };

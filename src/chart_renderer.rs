@@ -83,7 +83,7 @@ impl ChartRenderer {
             }
         }
 
-        output_str += &chart.info_bar.render(chart);
+        output_str += &chart.info_bar.render();
 
         println!("{}", output_str)
     }

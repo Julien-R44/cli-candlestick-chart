@@ -16,7 +16,7 @@ impl InfoBar {
         InfoBar { name, chart_data }
     }
 
-    pub fn render(&self, chart: &Chart) -> String {
+    pub fn render(&self) -> String {
         let chart_data = self.chart_data.borrow();
         let main_set = chart_data.main_candle_set.clone();
         let visible_set = chart_data.visible_candle_set.clone();
