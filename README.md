@@ -14,6 +14,8 @@ cli-candlestick-chart = "0.1"
 ```
 
 ```rust
+use cli_candlestick_chart::{Candle, Chart};
+
 fn main() {
     // Add some candles
     let candles: Vec<Candle> = vec![
@@ -41,6 +43,7 @@ fn main() {
 
     // Create and display the chart
     let chart = Chart::new(candles);
+
     chart.draw();
 }
 ```
