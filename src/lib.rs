@@ -10,6 +10,8 @@ use y_axis::*;
 mod chart_data;
 use chart_data::*;
 
+mod candle_set;
+
 mod info_bar;
 
 pub use chart::Candle;

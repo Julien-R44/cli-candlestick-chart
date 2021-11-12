@@ -1,3 +1,5 @@
+use std::{cell::RefCell, rc::Rc};
+
 use crate::{info_bar::InfoBar, ChartData, ChartRenderer, YAxis};
 use serde::Deserialize;
 
@@ -36,16 +38,16 @@ impl Candle {
 pub struct Chart {
     pub renderer: ChartRenderer,
     pub y_axis: YAxis,
-    pub chart_data: ChartData,
+    pub chart_data: Rc<RefCell<ChartData>>,
     pub info_bar: InfoBar,
 }
 
 impl Chart {
-    pub fn new(candles: Vec<Candle>) -> Self {
+    pub fn new(candles: &[Candle]) -> Self {
         let renderer = ChartRenderer::new();
-        let chart_data = ChartData::new(candles);
-        let y_axis = YAxis::new(&chart_data);
-        let info_bar = InfoBar::new("APPLE".to_string(), &chart_data);
+        let chart_data = Rc::new(RefCell::new(ChartData::new(candles.to_vec())));
+        let y_axis = YAxis::new(chart_data.clone());
+        let info_bar = InfoBar::new("APPLE".to_string(), chart_data.clone());
 
         Chart {
             renderer,

@@ -1,33 +1,33 @@
+use std::{cell::RefCell, rc::Rc};
+
 use crate::chart_data::ChartData;
 
 pub struct YAxis {
-    pub width: i64,
-    chart_data: ChartData,
-    margin_right: i64,
-    max_len_characteristic: i64,
+    pub chart_data: Rc<RefCell<ChartData>>,
 }
 
 impl YAxis {
-    pub fn new(chart_data: &ChartData) -> YAxis {
-        let cloned_chart_data = chart_data.clone();
+    pub const CHAR_PRECISION: i64 = 4;
+    pub const DEC_PRECISION: i64 = 2;
+    pub const MARGIN_RIGHT: i64 = 4;
+    pub const PRECISION: i64 = 2;
 
-        let max_len_characteristic = chart_data.max_value.ceil().to_string().len() as i64;
-        let precision = 2;
-        let margin_right = 4;
+    pub const WIDTH: i64 = YAxis::CHAR_PRECISION
+        + YAxis::MARGIN_RIGHT
+        + 1
+        + YAxis::DEC_PRECISION
+        + YAxis::MARGIN_RIGHT;
 
-        YAxis {
-            chart_data: cloned_chart_data,
-            width: max_len_characteristic + precision + 1 + 3 + margin_right,
-            margin_right,
-            max_len_characteristic,
-        }
+    pub fn new(chart_data: Rc<RefCell<ChartData>>) -> YAxis {
+        YAxis { chart_data }
     }
 
     pub fn price_to_height(&self, price: f64) -> f64 {
-        let height = self.chart_data.terminal_size.1;
+        let chart_data = self.chart_data.borrow();
+        let height = chart_data.height;
 
-        let min_value = self.chart_data.min_value;
-        let max_value = self.chart_data.max_value;
+        let min_value = chart_data.visible_candle_set.min_value;
+        let max_value = chart_data.visible_candle_set.max_value;
 
         (price - min_value) / (max_value - min_value) * height as f64
     }
@@ -40,24 +40,25 @@ impl YAxis {
     }
 
     fn render_tick(&self, y: u16) -> String {
-        let min_value = self.chart_data.min_value;
-        let max_value = self.chart_data.max_value;
-        let height = self.chart_data.terminal_size.1;
+        let chart_data = self.chart_data.borrow();
+        let min_value = chart_data.visible_candle_set.min_value;
+        let max_value = chart_data.visible_candle_set.max_value;
+        let height = chart_data.height;
 
         let price = min_value + (y as f64 * (max_value - min_value) / height as f64);
-        let cell_min_length = (self.max_len_characteristic + 3) as usize;
+        let cell_min_length = (4 + 3) as usize;
 
         format!(
             "{0:<cell_min_length$.2} │┈{margin}",
             price,
             cell_min_length = cell_min_length,
-            margin = " ".repeat(self.margin_right as usize)
+            margin = " ".repeat(YAxis::MARGIN_RIGHT as usize)
         )
     }
 
     fn render_empty(&self) -> String {
-        let cell = " ".repeat((self.max_len_characteristic + 4) as usize);
-        let margin = " ".repeat((self.margin_right + 1).try_into().unwrap());
+        let cell = " ".repeat((4 + 4) as usize);
+        let margin = " ".repeat((YAxis::MARGIN_RIGHT + 1).try_into().unwrap());
 
         format!("{}│{}", cell, margin)
     }

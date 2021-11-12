@@ -14,6 +14,8 @@ impl ChartRenderer {
     const UNICODE_UPPER_WICK: char = '╷';
     const UNICODE_LOWER_WICK: char = '╵';
 
+    pub const MARGIN_TOP: i64 = 3;
+
     pub fn new() -> ChartRenderer {
         ChartRenderer {}
     }
@@ -69,14 +71,14 @@ impl ChartRenderer {
     pub fn render(&self, chart: &Chart) {
         let mut output_str = "".to_owned();
 
-        let term_height = chart.chart_data.terminal_size.1;
+        let chart_data = chart.chart_data.borrow();
 
-        for y in (1..term_height).rev() {
+        for y in (1..chart_data.height as u16).rev() {
             output_str += "\n";
 
             output_str += &chart.y_axis.render_line(y);
 
-            for candle in chart.chart_data.candles.iter() {
+            for candle in chart_data.visible_candle_set.candles.iter() {
                 output_str += &self.render_candle(candle, y.into(), &chart.y_axis);
             }
         }
