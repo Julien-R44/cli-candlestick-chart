@@ -1,6 +1,14 @@
 [package]
 name = "cli-candlestick-chart"
 version = "0.1.0"
+license = "MIT"
+description = "A library for displaying candlestick charts right into your terminal."
+readme = "README.md"
+homepage = "https://github.com/Julien-R44/cli-candlestick-chart"
+repository = "https://github.com/Julien-R44/cli-candlestick-chart"
+keywords = ["cli", "terminal", "trading", "candlestick", "chart"]
+categories = ["command-line-interface", "visualization"]
+authors = ["Julien-R44 <julien@ripouteau.com>"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
