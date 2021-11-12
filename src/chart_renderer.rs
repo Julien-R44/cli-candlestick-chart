@@ -73,29 +73,19 @@ impl ChartRenderer {
     pub fn render(&self, chart: &Chart) {
         let mut output_str = "".to_owned();
 
-        let min_value = chart.chart_data.min_value;
-        let max_value = chart.chart_data.max_value;
-
         let term_height = chart.chart_data.terminal_size.1;
 
         for y in (1..term_height).rev() {
             output_str += "\n";
 
-            if y % 4 == 0 {
-                let y_axis = format!(
-                    "{:.2} │┈   ",
-                    min_value + (y as f64 * (max_value - min_value) / term_height as f64)
-                );
-
-                output_str += &y_axis;
-            } else {
-                output_str += "       │    ";
-            }
+            output_str += &chart.y_axis.render_line(y);
 
             for candle in chart.chart_data.candles.iter() {
                 output_str += &self.render_candle(candle, y.into(), &chart.y_axis);
             }
         }
+
+        output_str += &chart.info_bar.render(chart);
 
         println!("{}", output_str)
     }
