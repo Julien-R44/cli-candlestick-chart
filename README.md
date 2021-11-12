@@ -1,7 +1,7 @@
 # cli-candlestick-chart
 
 [![CI](https://github.com/Julien-R44/cli-candlestick-chart/actions/workflows/rust.yml/badge.svg?branch=main)](https://github.com/Julien-R44/cli-candlestick-chart/actions/workflows/rust.yml)
-[![Latest version](https://img.shields.io/crates/v/cli-candlestick-chart.svg)](https://crates.io/crates/dialoguer)
+[![Latest version](https://img.shields.io/crates/v/cli-candlestick-chart.svg)](https://crates.io/crates/cli-candlestick-chart)
 
 This module allows you to display candle charts directly in your terminal. 
 
