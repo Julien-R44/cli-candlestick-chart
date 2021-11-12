@@ -86,3 +86,9 @@ impl ChartRenderer {
         println!("{}", output_str)
     }
 }
+
+impl Default for ChartRenderer {
+    fn default() -> Self {
+        Self::new()
+    }
+}
