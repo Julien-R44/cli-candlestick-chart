@@ -8,6 +8,7 @@ This module allows you to display candle charts directly in your terminal.
 I did this project mainly to learn Rust, so the code is may be not very good at some places.
 
 ![](https://raw.githubusercontent.com/Julien-R44/cli-candlestick-chart/main/docs/capture.png)
+![](https://raw.githubusercontent.com/Julien-R44/cli-candlestick-chart/main/docs/capture2.png)
 
 # Usage
 Add this to your `Cargo.toml`
