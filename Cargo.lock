@@ -27,7 +27,7 @@ dependencies = [
 
 [[package]]
 name = "cli-candlestick-chart"
-version = "0.1.0"
+version = "0.1.2"
 dependencies = [
  "colored",
  "csv",
