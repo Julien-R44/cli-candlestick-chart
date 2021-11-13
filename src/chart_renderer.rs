@@ -1,7 +1,10 @@
 use crate::{y_axis::YAxis, Candle, CandleType, Chart};
 use colored::*;
 
-pub struct ChartRenderer {}
+pub struct ChartRenderer {
+    pub bearish_color: (u8, u8, u8),
+    pub bullish_color: (u8, u8, u8),
+}
 
 impl ChartRenderer {
     const UNICODE_VOID: char = ' ';
@@ -17,7 +20,20 @@ impl ChartRenderer {
     pub const MARGIN_TOP: i64 = 3;
 
     pub fn new() -> ChartRenderer {
-        ChartRenderer {}
+        ChartRenderer {
+            bearish_color: (52, 208, 88),
+            bullish_color: (234, 74, 90),
+        }
+    }
+
+    fn colorize(&self, candle_type: &CandleType, string: &str) -> String {
+        let (ar, ag, ab) = self.bearish_color;
+        let (br, bg, bb) = self.bullish_color;
+
+        match candle_type {
+            CandleType::Bearish => format!("{}", string.truecolor(ar, ag, ab)),
+            CandleType::Bullish => format!("{}", string.truecolor(br, bg, bb)),
+        }
     }
 
     fn render_candle(&self, candle: &Candle, y: i32, y_axis: &YAxis) -> String {
@@ -62,10 +78,8 @@ impl ChartRenderer {
         }
 
         let candle_type = candle.get_type();
-        match candle_type {
-            CandleType::Bullish => output.to_string().green().to_string(),
-            CandleType::Bearish => output.to_string().red().to_string(),
-        }
+
+        self.colorize(&candle_type, &output.to_string())
     }
 
     pub fn render(&self, chart: &Chart) {

@@ -45,10 +45,10 @@ impl CandleSet {
     }
 
     fn compute_variation(&mut self) {
-        let first_candle = self.candles.first().unwrap();
-        let last_candle = self.candles.last().unwrap();
+        let open = self.candles.first().unwrap().open;
+        let close = self.candles.last().unwrap().close;
 
-        self.variation = (last_candle.close - first_candle.close) / first_candle.close;
+        self.variation = ((close - open) / open) * 100.0;
     }
 
     fn compute_average(&mut self) {

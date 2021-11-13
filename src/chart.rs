@@ -60,4 +60,16 @@ impl Chart {
     pub fn draw(&self) {
         self.renderer.render(self);
     }
+
+    pub fn set_name(&mut self, name: String) {
+        self.info_bar.name = name;
+    }
+
+    pub fn set_bear_color(&mut self, r: u8, g: u8, b: u8) {
+        self.renderer.bearish_color = (r, g, b);
+    }
+
+    pub fn set_bull_color(&mut self, r: u8, g: u8, b: u8) {
+        self.renderer.bullish_color = (r, g, b);
+    }
 }

@@ -7,7 +7,7 @@ pub struct YAxis {
 }
 
 impl YAxis {
-    pub const CHAR_PRECISION: i64 = 4;
+    pub const CHAR_PRECISION: i64 = 6;
     pub const DEC_PRECISION: i64 = 2;
     pub const MARGIN_RIGHT: i64 = 4;
     pub const PRECISION: i64 = 2;
@@ -46,7 +46,7 @@ impl YAxis {
         let height = chart_data.height;
 
         let price = min_value + (y as f64 * (max_value - min_value) / height as f64);
-        let cell_min_length = (4 + 3) as usize;
+        let cell_min_length = (YAxis::CHAR_PRECISION + YAxis::DEC_PRECISION + 1) as usize;
 
         format!(
             "{0:<cell_min_length$.2} │┈{margin}",
@@ -57,7 +57,7 @@ impl YAxis {
     }
 
     fn render_empty(&self) -> String {
-        let cell = " ".repeat((4 + 4) as usize);
+        let cell = " ".repeat((YAxis::CHAR_PRECISION + YAxis::DEC_PRECISION + 2) as usize);
         let margin = " ".repeat((YAxis::MARGIN_RIGHT + 1).try_into().unwrap());
 
         format!("{}│{}", cell, margin)

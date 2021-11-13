@@ -2,7 +2,7 @@ use std::{cell::RefCell, rc::Rc};
 
 use colored::Colorize;
 
-use crate::{chart::Chart, chart_data::ChartData, y_axis::YAxis};
+use crate::{chart_data::ChartData, y_axis::YAxis};
 
 pub struct InfoBar {
     pub name: String,
@@ -38,11 +38,11 @@ impl InfoBar {
 
         output_str += &format!(
             "{:>width$} | Price: {price} | Highest: {high} | Lowest: {low} | Var.: {var} | Avg.: {avg} │",
-            "│  ".to_owned() + &self.name,
-            width = YAxis::WIDTH as usize + 1,
+            &self.name,
+            width = YAxis::WIDTH as usize + 3,
             high = format!("{:.2}", main_set.max_value).green().bold(),
             low = format!("{:.2}", main_set.min_value).red().bold(),
-            var = format!("↗ +{:.2}%", main_set.variation).green().bold(),
+            var = format!("↗ {:>+.2}%", main_set.variation).green().bold(),
             avg = avg_format,
             price = format!("{:.2}", main_set.last_price).green().bold(),
         );
