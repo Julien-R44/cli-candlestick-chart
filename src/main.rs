@@ -14,17 +14,14 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let mut chart = Chart::new(&candles);
 
+    // Set the chart title
     chart.set_name(String::from("BTC/USDT"));
 
-    // Set custom green color
+    // Set customs colors
     chart.set_bear_color(1, 205, 254);
-
-    // Set custom red color
     chart.set_bull_color(255, 107, 153);
 
     chart.draw();
-
-    // Set the chart title
 
     Ok(())
 }
