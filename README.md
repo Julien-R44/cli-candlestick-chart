@@ -3,9 +3,9 @@
 [![CI](https://github.com/Julien-R44/cli-candlestick-chart/actions/workflows/rust.yml/badge.svg?branch=main)](https://github.com/Julien-R44/cli-candlestick-chart/actions/workflows/rust.yml)
 [![Latest version](https://img.shields.io/crates/v/cli-candlestick-chart.svg)](https://crates.io/crates/cli-candlestick-chart)
 
-This module allows you to display candle charts directly in your terminal. 
+This library allows you to display candle charts directly in your terminal. 
 
-I did this project mainly to learn Rust, so the code is may be not very good at some places.
+I did this project mainly to learn Rust, so the code may be not very good at some places.
 
 ![](https://raw.githubusercontent.com/Julien-R44/cli-candlestick-chart/main/docs/capture.png)
 ![](https://raw.githubusercontent.com/Julien-R44/cli-candlestick-chart/main/docs/capture2.png)
