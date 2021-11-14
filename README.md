@@ -10,7 +10,20 @@ I did this project mainly to learn Rust, so the code may be not very good at som
 ![](https://raw.githubusercontent.com/Julien-R44/cli-candlestick-chart/main/docs/capture.png)
 ![](https://raw.githubusercontent.com/Julien-R44/cli-candlestick-chart/main/docs/capture2.png)
 
-# Usage
+# Table of contents
+* [Features](#features)
+* [API Usage](#api-usage)
+* [Binary Usage](#binary-usage)
+* [Examples](#examples)
+* [Build](#build)
+
+
+# Features
+- Customizable
+- Auto-fit to terminal size
+- Shipped as binary for standalone usage
+
+# API Usage
 Add this to your `Cargo.toml`
 ```toml
 [dependencies]
@@ -28,21 +41,6 @@ fn main() {
         Candle::new(127.720001, 131.050003, 126.379997, 126.599998),
         Candle::new(128.360001, 131.630005, 127.860001, 130.919998),
         Candle::new(132.429993, 132.630005, 130.229996, 132.050003),
-        Candle::new(129.190002, 130.169998, 128.500000, 128.979996),
-        Candle::new(128.500000, 129.690002, 126.860001, 128.800003),
-        Candle::new(128.759995, 131.449997, 128.490005, 130.889999),
-        Candle::new(130.800003, 131.000000, 128.759995, 128.910004),
-        Candle::new(128.779999, 130.220001, 127.000000, 127.139999),
-        Candle::new(127.779999, 128.710007, 126.940002, 127.830002),
-        Candle::new(128.660004, 132.490005, 128.550003, 132.029999),
-        Candle::new(133.800003, 139.669998, 133.589996, 136.869995),
-        Candle::new(136.279999, 139.850006, 135.020004, 139.070007),
-        Candle::new(143.070007, 145.089996, 136.539993, 142.919998),
-        Candle::new(143.600006, 144.300003, 141.369995, 143.160004),
-        Candle::new(143.429993, 144.300003, 140.410004, 142.059998),
-        Candle::new(139.520004, 141.990005, 136.699997, 137.089996),
-        Candle::new(135.830002, 136.740005, 130.210007, 131.960007),
-        Candle::new(133.750000, 135.380005, 130.929993, 134.139999),
     ];
 
     // Create and display the chart
@@ -59,7 +57,29 @@ fn main() {
 }
 ```
 
+# Binary Usage
+```
+USAGE:
+    cli-candlestick-chart.exe [OPTIONS]
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+        --bear-color <BEAR_COLOR>        Sets the descending candles color.
+        --bull-color <BULL_COLOR>        Sets the ascending candles color.
+        --chart-name <CHART_NAME>        Sets the chart name.
+    -f, --file <FILE>                    File to read candles from, if reading-mode is `*-file.`
+    -r, --reading-mode <READING_MODE>    Make the program reads and parse candles from stdin. 
+                                         [possible values: stdin, csv-file, json-file]
+```
+
+Examples : 
+
+
 # Examples
+## Api 
 - [Basic example with CSV parsing](https://github.com/Julien-R44/cli-candlestick-chart/blob/main/examples/basic-with-csv-parsing.rs)
     
     `cargo run --example basic-with-csv-parsing --features=serde`
@@ -67,3 +87,35 @@ fn main() {
 - [Fetch candles from binance](https://github.com/Julien-R44/cli-candlestick-chart/blob/main/examples/fetch-from-binance.rs)
 
     `cargo run --example fetch-from-binance --features=serde`
+
+## Binary 
+- Read CSV from file :
+```
+./cli-candlestick-chart \
+    -r=csv-file \
+    -f=./examples/BTC-USD.csv \
+    --chart-name="My BTC Chart" \
+    --bear-color="#b967ff" \
+    --bull-color="ff6b99"
+```
+
+- Read from stdin :
+```
+echo '[
+  {
+    "open": 28994.009766,
+    "high": 29600.626953,
+    "low": 28803.585938,
+    "close": 29374.152344
+  },
+  {
+    "open": 29376.455078,
+    "high": 33155.117188,
+    "low": 29091.181641,
+    "close": 32127.267578
+  }
+] | ./cli-candlestick-chart -r=stdin \
+    --chart-name="My BTC Chart" \
+    --bear-color="#b967ff" \
+    --bull-color="ff6b99"
+```
