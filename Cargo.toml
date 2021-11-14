@@ -14,13 +14,20 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-serde = { version = "1", features = ["derive"], optional = true }
 terminal_size = "0.1.17"
 colored = "2"
+serde = { version = "1", features = ["derive"], optional = true }
+clap = { version = "2.33.3", optional = true }
+serde_json = { version = "1.0.1", optional = true }
+csv = { version = "1.1", optional = true }
 
 [dev-dependencies]
-csv = "1.1"
 reqwest = { version = "0.11", features = ["blocking", "json"] }
+
+[[bin]]
+name = "cli-candlestick-chart"
+path = "src/bin/cli/main.rs"
+required-features = ["serde", "serde_json", "csv", "clap"]
 
 [[example]]
 name = "basic-with-csv-parsing"
