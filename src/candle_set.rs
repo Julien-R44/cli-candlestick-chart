@@ -52,20 +52,16 @@ impl CandleSet {
     }
 
     fn compute_average(&mut self) {
-        let mut sum = 0.0;
-        for candle in &self.candles {
-            sum += candle.close;
-        }
-
+        let sum = self.candles.iter().fold(0.0, |acc, c| acc + c.close);
         self.average = sum / self.candles.len() as f64;
     }
 
     fn compute_min_and_max_values(&mut self) {
-        let mut sorted_candles = self.candles.clone();
+        self.max_value = self
+            .candles
+            .iter()
+            .fold(f64::NEG_INFINITY, |a, b| a.max(b.high));
 
-        sorted_candles.sort_by(|a, b| a.low.partial_cmp(&b.low).unwrap());
-        self.min_value = sorted_candles.first().unwrap().low;
-        sorted_candles.sort_by(|a, b| b.high.partial_cmp(&a.high).unwrap());
-        self.max_value = sorted_candles.first().unwrap().high;
+        self.min_value = self.candles.iter().fold(f64::INFINITY, |a, b| a.min(b.low));
     }
 }
