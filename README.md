@@ -63,3 +63,7 @@ fn main() {
 - [Basic example with CSV parsing](https://github.com/Julien-R44/cli-candlestick-chart/blob/main/examples/basic-with-csv-parsing.rs)
     
     `cargo run --example basic-with-csv-parsing --features=serde`
+
+- [Fetch candles from binance](https://github.com/Julien-R44/cli-candlestick-chart/blob/main/examples/fetch-from-binance.rs)
+
+    `cargo run --example fetch-from-binance --features=serde`

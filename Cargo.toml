@@ -20,7 +20,12 @@ colored = "2"
 
 [dev-dependencies]
 csv = "1.1"
+reqwest = { version = "0.11", features = ["blocking", "json"] }
 
 [[example]]
 name = "basic-with-csv-parsing"
+required-features = ["serde"]
+
+[[example]]
+name = "fetch-from-binance"
 required-features = ["serde"]
