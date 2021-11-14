@@ -75,9 +75,6 @@ OPTIONS:
                                          [possible values: stdin, csv-file, json-file]
 ```
 
-Examples : 
-
-
 # Examples
 ## Api 
 - [Basic example with CSV parsing](https://github.com/Julien-R44/cli-candlestick-chart/blob/main/examples/basic-with-csv-parsing.rs)
@@ -90,7 +87,7 @@ Examples :
 
 ## Binary 
 - Read CSV from file :
-```
+```bash
 ./cli-candlestick-chart \
     -r=csv-file \
     -f=./examples/BTC-USD.csv \
@@ -100,7 +97,7 @@ Examples :
 ```
 
 - Read from stdin :
-```
+```bash
 echo '[
   {
     "open": 28994.009766,
@@ -114,7 +111,7 @@ echo '[
     "low": 29091.181641,
     "close": 32127.267578
   }
-] | ./cli-candlestick-chart -r=stdin \
+]' | ./cli-candlestick-chart -r=stdin \
     --chart-name="My BTC Chart" \
     --bear-color="#b967ff" \
     --bull-color="ff6b99"
