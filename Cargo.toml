@@ -21,3 +21,6 @@ colored = "2"
 [dev-dependencies]
 csv = "1.1"
 
+[[example]]
+name = "basic-with-csv-parsing"
+required-features = ["serde"]
