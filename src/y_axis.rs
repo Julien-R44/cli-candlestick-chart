@@ -10,7 +10,6 @@ impl YAxis {
     pub const CHAR_PRECISION: i64 = 6;
     pub const DEC_PRECISION: i64 = 2;
     pub const MARGIN_RIGHT: i64 = 4;
-    pub const PRECISION: i64 = 2;
 
     pub const WIDTH: i64 = YAxis::CHAR_PRECISION
         + YAxis::MARGIN_RIGHT
