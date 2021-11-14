@@ -15,8 +15,6 @@ I did this project mainly to learn Rust, so the code may be not very good at som
 * [API Usage](#api-usage)
 * [Binary Usage](#binary-usage)
 * [Examples](#examples)
-* [Build](#build)
-
 
 # Features
 - Customizable
