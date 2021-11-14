@@ -1,16 +1,24 @@
-# cli-candlestick-chart
+<div align="center">
+    <img src="https://i.imgur.com/dxLBSkD.png" />
+    <br/>
+    <br/>
+    <b>Draw candlesticks charts right into your terminal.</b>
+    <br/>
+    <br/>
+    <a href="https://github.com/Julien-R44/cli-candlestick-chart/actions/workflows/rust.yml">
+        <img src="https://github.com/Julien-R44/cli-candlestick-chart/actions/workflows/rust.yml/badge.svg?branch=main" />
+    </a>
+    <a href="https://crates.io/crates/cli-candlestick-chart">
+        <img src="https://img.shields.io/crates/v/cli-candlestick-chart.svg" />
+    </a>
+    <img src="https://img.shields.io/crates/l/cli-candlestick-chart.svg">
+    <br/>
+    <br/>
+</div>
 
-[![CI](https://github.com/Julien-R44/cli-candlestick-chart/actions/workflows/rust.yml/badge.svg?branch=main)](https://github.com/Julien-R44/cli-candlestick-chart/actions/workflows/rust.yml)
-[![Latest version](https://img.shields.io/crates/v/cli-candlestick-chart.svg)](https://crates.io/crates/cli-candlestick-chart)
 
-This library allows you to display candle charts directly in your terminal. 
-
-I did this project mainly to learn Rust, so the code may be not very good at some places.
-
-![](https://raw.githubusercontent.com/Julien-R44/cli-candlestick-chart/main/docs/capture.png)
 ![](https://raw.githubusercontent.com/Julien-R44/cli-candlestick-chart/main/docs/capture2.png)
 
-# Table of contents
 * [Features](#features)
 * [API Usage](#api-usage)
 * [Binary Usage](#binary-usage)
@@ -25,7 +33,7 @@ I did this project mainly to learn Rust, so the code may be not very good at som
 Add this to your `Cargo.toml`
 ```toml
 [dependencies]
-cli-candlestick-chart = "0.1"
+cli-candlestick-chart = "0.2"
 ```
 
 ```rust
@@ -42,7 +50,7 @@ fn main() {
     ];
 
     // Create and display the chart
-    let mut chart = Chart::new(candles);
+    let mut chart = Chart::new(&candles);
 
     // Set the chart title
     chart.set_name(String::from("BTC/USDT"));
@@ -56,6 +64,8 @@ fn main() {
 ```
 
 # Binary Usage
+
+
 ```
 USAGE:
     cli-candlestick-chart.exe [OPTIONS]
@@ -72,16 +82,26 @@ OPTIONS:
     -r, --reading-mode <READING_MODE>    Choose your reading mode. 
                                          [possible values: stdin, csv-file, json-file]
 ```
+When requesting the CSV file mode, the library expects a CSV file with `open,high,low,close` headers fields.
+
+When requesting the JSON or stdin mode, the library expects a JSON with the following format : 
+```
+[
+  {
+    "open": 28994.009766,
+    "high": 29600.626953,
+    "low": 28803.585938,
+    "close": 29374.152344
+  },
+  ...
+]
+```
 
 # Examples
-## Api 
-- [Basic example with CSV parsing](https://github.com/Julien-R44/cli-candlestick-chart/blob/main/examples/basic-with-csv-parsing.rs)
-    
-    `cargo run --example basic-with-csv-parsing --features=serde`
+## API 
+[Basic example with CSV parsing](https://github.com/Julien-R44/cli-candlestick-chart/blob/main/examples/basic-with-csv-parsing.rs) : Run with `cargo run --example basic-with-csv-parsing --features=serde`
 
-- [Fetch candles from binance](https://github.com/Julien-R44/cli-candlestick-chart/blob/main/examples/fetch-from-binance.rs)
-
-    `cargo run --example fetch-from-binance --features=serde`
+[Fetch candles from binance](https://github.com/Julien-R44/cli-candlestick-chart/blob/main/examples/fetch-from-binance.rs) : Run with `cargo run --example fetch-from-binance --features=serde`
 
 ## Binary 
 - Read CSV from file :
@@ -109,7 +129,8 @@ echo '[
     "low": 29091.181641,
     "close": 32127.267578
   }
-]' | ./cli-candlestick-chart -r=stdin \
+]' | ./cli-candlestick-chart \
+    -r=stdin \
     --chart-name="My BTC Chart" \
     --bear-color="#b967ff" \
     --bull-color="ff6b99"
