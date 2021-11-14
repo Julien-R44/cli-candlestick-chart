@@ -1,4 +1,4 @@
-use crate::{Candle, Chart, chart::CandleType, y_axis::YAxis};
+use crate::{chart::CandleType, y_axis::YAxis, Candle, Chart};
 use colored::*;
 
 pub struct ChartRenderer {
