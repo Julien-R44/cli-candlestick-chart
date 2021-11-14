@@ -71,7 +71,7 @@ OPTIONS:
         --bull-color <BULL_COLOR>        Sets the ascending candles color.
         --chart-name <CHART_NAME>        Sets the chart name.
     -f, --file <FILE>                    File to read candles from, if reading-mode is `*-file.`
-    -r, --reading-mode <READING_MODE>    Make the program reads and parse candles from stdin. 
+    -r, --reading-mode <READING_MODE>    Choose your reading mode. 
                                          [possible values: stdin, csv-file, json-file]
 ```
 
