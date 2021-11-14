@@ -1,12 +1,11 @@
 use std::{cell::RefCell, rc::Rc};
 
-use serde::Deserialize;
-
 use crate::{
-    chart_data::ChartData, chart_renderer::ChartRenderer, info_bar::InfoBar, y_axis::YAxis
+    chart_data::ChartData, chart_renderer::ChartRenderer, info_bar::InfoBar, y_axis::YAxis,
 };
 
-#[derive(Debug, Deserialize, Clone)]
+#[derive(Debug, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize))]
 pub struct Candle {
     pub open: f64,
     pub high: f64,
