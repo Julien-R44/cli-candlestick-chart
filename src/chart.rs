@@ -1,7 +1,10 @@
 use std::{cell::RefCell, rc::Rc};
 
-use crate::{info_bar::InfoBar, ChartData, ChartRenderer, YAxis};
 use serde::Deserialize;
+
+use crate::{
+    chart_data::ChartData, chart_renderer::ChartRenderer, info_bar::InfoBar, y_axis::YAxis
+};
 
 #[derive(Debug, Deserialize, Clone)]
 pub struct Candle {
@@ -36,10 +39,10 @@ impl Candle {
 }
 
 pub struct Chart {
-    pub renderer: ChartRenderer,
-    pub y_axis: YAxis,
-    pub chart_data: Rc<RefCell<ChartData>>,
-    pub info_bar: InfoBar,
+    pub(crate) renderer: ChartRenderer,
+    pub(crate) y_axis: YAxis,
+    pub(crate) chart_data: Rc<RefCell<ChartData>>,
+    pub(crate) info_bar: InfoBar,
 }
 
 impl Chart {

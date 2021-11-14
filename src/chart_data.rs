@@ -1,5 +1,5 @@
 use crate::{
-    candle_set::CandleSet, chart::Candle, chart_renderer::ChartRenderer, info_bar::InfoBar, YAxis,
+    candle_set::CandleSet, chart::Candle, chart_renderer::ChartRenderer, info_bar::InfoBar, y_axis::YAxis,
 };
 use terminal_size::terminal_size;
 
