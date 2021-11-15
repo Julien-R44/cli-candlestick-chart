@@ -49,10 +49,6 @@ jobs:
             os: ubuntu-latest
             cross: true
             binary_path: target/aarch64-unknown-linux-gnu/release/cli-candlestick-chart
-          - target: aarch64-linux-android
-            os: ubuntu-latest
-            cross: true
-            binary_path: target/aarch64-linux-android/release/cli-candlestick-chart
 
     runs-on: ${{ matrix.target.os }}
     steps:
@@ -64,7 +60,7 @@ jobs:
         shell: bash
         run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
 
-      - name: Install libssl
+      - name: Install libssl ubuntu
         id: install_build_tools
         if: matrix.target.os == 'ubuntu-latest'
         run: |
