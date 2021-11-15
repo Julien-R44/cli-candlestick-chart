@@ -20,12 +20,13 @@ serde = { version = "1", features = ["derive"], optional = true }
 clap = { version = "2.33.3", optional = true }
 serde_json = { version = "1.0.1", optional = true }
 csv = { version = "1.1", optional = true }
+reqwest = { version = "0.11", features = ["blocking", "json"], optional = true }
 
 [dev-dependencies]
 reqwest = { version = "0.11", features = ["blocking", "json"] }
 
 [features]
-bin-app = ["serde", "serde_json", "csv", "clap"]
+bin-app = ["serde", "serde_json", "csv", "clap", "reqwest"]
 
 [[bin]]
 name = "cli-candlestick-chart"
@@ -34,8 +35,8 @@ required-features = ["bin-app"]
 
 [[example]]
 name = "basic-with-csv-parsing"
-required-features = ["serde"]
+required-features = ["serde", "csv"]
 
 [[example]]
 name = "fetch-from-binance"
-required-features = ["serde"]
+required-features = ["serde", "reqwest"]
