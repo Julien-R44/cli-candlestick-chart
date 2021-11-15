@@ -64,6 +64,14 @@ jobs:
         shell: bash
         run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
 
+      - name: Install libssl
+        id: install_build_tools
+        if: ${{ matrix.target.os }} == "ubuntu-latest"
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            libssl-dev
+
       - name: Install stable toolchain
         uses: actions-rs/toolchain@v1
         with:
