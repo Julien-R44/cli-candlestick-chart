@@ -20,6 +20,9 @@ impl ChartRenderer {
     pub const MARGIN_TOP: i64 = 3;
 
     pub fn new() -> ChartRenderer {
+        #[cfg(target_os = "windows")]
+        control::set_virtual_terminal(true).unwrap();
+
         ChartRenderer {
             bearish_color: (52, 208, 88),
             bullish_color: (234, 74, 90),
