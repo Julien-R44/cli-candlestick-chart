@@ -68,9 +68,8 @@ jobs:
         id: install_build_tools
         if: ${{ matrix.target.os }} == "ubuntu-latest"
         run: |
-          apt-get update
-          apt-get install -y --no-install-recommends \
-            libssl-dev
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libssl-dev
 
       - name: Install stable toolchain
         uses: actions-rs/toolchain@v1
