@@ -1,4 +1,3 @@
-use clap::{App, Arg};
 use cli_candlestick_chart::{Candle, Chart};
 use std::error::Error;
 use std::io::{self, BufRead};
@@ -7,7 +6,10 @@ mod utils;
 use utils::hexa_to_rgb;
 
 mod get_args;
-use get_args::{get_args, ReadingMode};
+use get_args::{get_args, CandlesRetrievalMode};
+
+mod yahoo_api;
+use yahoo_api::get_yahoo_klines;
 
 fn parse_candles_from_stdin() -> Vec<Candle> {
     let stdin = io::stdin();
@@ -38,17 +40,24 @@ fn main() {
     let options = get_args();
     let mut candles: Vec<Candle> = Vec::new();
 
-    match options.reading_mode {
-        ReadingMode::Stdin => {
+    match options.mode {
+        CandlesRetrievalMode::Stdin => {
             candles = parse_candles_from_stdin();
         }
-        ReadingMode::CsvFile => {
+        CandlesRetrievalMode::CsvFile => {
             let filepath = options.file_path.expect("No file path provided.");
             candles = parse_candles_from_csv(&filepath).unwrap();
+        }
+        CandlesRetrievalMode::Yahoo => {
+            candles = get_yahoo_klines(&options.ticker.to_owned().unwrap(), &options.interval);
         }
     };
 
     let mut chart = Chart::new(&candles);
+
+    if !options.ticker.is_none() && options.mode == CandlesRetrievalMode::Yahoo {
+        chart.set_name(options.ticker.unwrap().to_string());
+    }
 
     if let Some(chart_name) = options.chart_name {
         chart.set_name(chart_name);
