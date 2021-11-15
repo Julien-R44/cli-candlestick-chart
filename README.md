@@ -35,7 +35,7 @@
 Add this to your `Cargo.toml`
 ```toml
 [dependencies]
-cli-candlestick-chart = "0.2"
+cli-candlestick-chart = "0.3"
 ```
 
 ```rust
