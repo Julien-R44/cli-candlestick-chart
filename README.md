@@ -64,11 +64,11 @@ fn main() {
 ```
 
 # Binary Usage
-
+Download the latest release for your platform [here](https://github.com/Julien-R44/cli-candlestick-chart/releases)
 
 ```
 USAGE:
-    cli-candlestick-chart.exe [OPTIONS]
+    cli-candlestick-chart [OPTIONS]
 
 FLAGS:
     -h, --help       Prints help information
