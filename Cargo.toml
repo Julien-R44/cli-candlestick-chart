@@ -24,10 +24,13 @@ csv = { version = "1.1", optional = true }
 [dev-dependencies]
 reqwest = { version = "0.11", features = ["blocking", "json"] }
 
+[features]
+bin-app = ["serde", "serde_json", "csv", "clap"]
+
 [[bin]]
 name = "cli-candlestick-chart"
 path = "src/bin/cli/main.rs"
-required-features = ["serde", "serde_json", "csv", "clap"]
+required-features = ["bin-app"]
 
 [[example]]
 name = "basic-with-csv-parsing"

@@ -76,7 +76,7 @@ jobs:
         with:
           use-cross: ${{ matrix.target.cross }}
           command: build
-          args: --release --bin=cli-candlestick-chart --features='serde serde_json csv clap' --target=${{ matrix.target.target }}
+          args: --release --bin=cli-candlestick-chart --features=bin-app --target=${{ matrix.target.target }}
 
       - name: Copy release files
         shell: bash
