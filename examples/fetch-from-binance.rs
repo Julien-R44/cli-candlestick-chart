@@ -21,7 +21,7 @@ struct BinanceKlinesItem {
 
 fn main() -> Result<(), Box<dyn Error>> {
     let candles =
-        reqwest::blocking::get("https://api.binance.com/api/v1/klines?symbol=BTCUSDT&interval=1h")?
+        reqwest::blocking::get("https://api.binance.com/api/v1/klines?symbol=CHZUSDT&interval=1h")?
             .json::<Vec<BinanceKlinesItem>>()?
             .iter()
             .map(|candle| {
@@ -38,13 +38,13 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let mut chart = Chart::new(&candles);
 
-    chart.set_name(String::from("BTC/USDT"));
+    chart.set_name(String::from("CHZ/USDT"));
     chart.set_bull_color(1, 205, 254);
     chart.set_bear_color(255, 107, 153);
     chart.set_vol_bull_color(1, 205, 254);
     chart.set_vol_bear_color(255, 107, 153);
-    chart.set_volume_pane_height(15);
-    chart.set_volume_pane_enabled(false);
+    chart.set_volume_pane_height(4);
+    chart.set_volume_pane_enabled(true);
     // chart.set_volume_pane_unicode_fill(true);
 
     chart.draw();
