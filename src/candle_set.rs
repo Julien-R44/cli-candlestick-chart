@@ -13,6 +13,7 @@ pub struct CandleSet {
     pub variation: f64,
     pub average: f64,
     pub last_price: f64,
+    pub cumulative_volume: f64,
 }
 
 impl CandleSet {
@@ -26,6 +27,7 @@ impl CandleSet {
             variation: 0.0,
             average: 0.0,
             last_price: 0.0,
+            cumulative_volume: 0.0,
         };
 
         cs.set_candles(candles);
@@ -44,6 +46,14 @@ impl CandleSet {
         self.compute_variation();
         self.compute_average();
         self.compute_last_price();
+        self.compute_cumulative_volume();
+    }
+
+    fn compute_cumulative_volume(&mut self) {
+        self.cumulative_volume = self
+            .candles
+            .iter()
+            .fold(0.0, |acc, candle| acc + candle.volume.unwrap_or_default());
     }
 
     fn compute_last_price(&mut self) {
