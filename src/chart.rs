@@ -1,9 +1,9 @@
-use std::{borrow::BorrowMut, cell::RefCell, rc::Rc};
-
 use crate::{
     chart_data::ChartData, chart_renderer::ChartRenderer, info_bar::InfoBar,
     volume_pane::VolumePane, y_axis::YAxis,
 };
+use std::cell::RefCell;
+use std::rc::Rc;
 
 #[derive(Debug, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize))]
@@ -69,10 +69,7 @@ impl Chart {
             (chart_data.borrow().terminal_size.1 / 6) as i64,
         );
 
-        chart_data
-            .borrow_mut()
-            .get_mut()
-            .compute_height(&volume_pane);
+        chart_data.borrow_mut().compute_height(&volume_pane);
 
         Chart {
             renderer,

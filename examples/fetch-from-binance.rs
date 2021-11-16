@@ -30,18 +30,22 @@ fn main() -> Result<(), Box<dyn Error>> {
                     candle.high.parse::<f64>().unwrap(),
                     candle.low.parse::<f64>().unwrap(),
                     candle.close.parse::<f64>().unwrap(),
+                    Some(candle.volume.parse::<f64>().unwrap()),
+                    Some(candle.open_time as i64),
                 )
             })
             .collect::<Vec<Candle>>();
 
     let mut chart = Chart::new(&candles);
 
-    // Set the chart title
     chart.set_name(String::from("BTC/USDT"));
-
-    // Set customs colors
-    chart.set_bear_color(1, 205, 254);
-    chart.set_bull_color(255, 107, 153);
+    chart.set_bull_color(1, 205, 254);
+    chart.set_bear_color(255, 107, 153);
+    chart.set_vol_bull_color(1, 205, 254);
+    chart.set_vol_bear_color(255, 107, 153);
+    chart.set_volume_pane_height(5);
+    chart.set_volume_pane_enabled(true);
+    chart.set_volume_pane_unicode_fill('🚀');
 
     chart.draw();
 

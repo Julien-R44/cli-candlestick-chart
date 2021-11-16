@@ -88,9 +88,11 @@ impl ChartRenderer {
     pub fn render(&self, chart: &Chart) {
         let mut output_str = "".to_owned();
 
-        let chart_data = chart.chart_data.borrow();
-
+        let mut chart_data = chart.chart_data.borrow_mut();
         chart_data.compute_height(&chart.volume_pane);
+        drop(chart_data);
+
+        let chart_data = chart.chart_data.borrow();
 
         for y in (1..chart_data.height as u16).rev() {
             output_str += "\n";
