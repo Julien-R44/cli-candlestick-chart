@@ -51,6 +51,10 @@ impl VolumePane {
             return self.colorize(&candle.get_type(), &self.unicode_fill.to_string());
         }
 
+        if y == 1 && self.unicode_fill == '┃' {
+            return self.colorize(&candle.get_type(), "╻");
+        }
+
         " ".to_string()
     }
 }
