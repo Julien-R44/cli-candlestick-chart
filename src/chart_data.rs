@@ -1,6 +1,6 @@
 use crate::{
     candle_set::CandleSet, chart::Candle, chart_renderer::ChartRenderer, info_bar::InfoBar,
-    y_axis::YAxis,
+    volume_pane::VolumePane, y_axis::YAxis,
 };
 use terminal_size::terminal_size;
 
@@ -20,11 +20,24 @@ impl ChartData {
             main_candle_set: CandleSet::new(candles),
             visible_candle_set: CandleSet::new(Vec::new()),
             terminal_size: (w.0, h.0),
-            height: h.0 as i64 - ChartRenderer::MARGIN_TOP - InfoBar::HEIGHT,
+            height: h.0 as i64,
         };
 
         chart_data.compute_visible_candles();
         chart_data
+    }
+
+    pub fn compute_height(&mut self, volume_pane: &VolumePane) {
+        let volume_pane_height = if volume_pane.enabled {
+            volume_pane.height
+        } else {
+            0
+        };
+
+        self.height = self.terminal_size.1 as i64
+            - ChartRenderer::MARGIN_TOP
+            - InfoBar::HEIGHT
+            - volume_pane_height;
     }
 
     pub fn compute_visible_candles(&mut self) {

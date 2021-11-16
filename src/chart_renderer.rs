@@ -24,8 +24,8 @@ impl ChartRenderer {
         control::set_virtual_terminal(true).unwrap();
 
         ChartRenderer {
-            bearish_color: (52, 208, 88),
-            bullish_color: (234, 74, 90),
+            bullish_color: (52, 208, 88),
+            bearish_color: (234, 74, 90),
         }
     }
 
@@ -88,6 +88,10 @@ impl ChartRenderer {
     pub fn render(&self, chart: &Chart) {
         let mut output_str = "".to_owned();
 
+        let mut chart_data = chart.chart_data.borrow_mut();
+        chart_data.compute_height(&chart.volume_pane);
+        drop(chart_data);
+
         let chart_data = chart.chart_data.borrow();
 
         for y in (1..chart_data.height as u16).rev() {
@@ -97,6 +101,18 @@ impl ChartRenderer {
 
             for candle in chart_data.visible_candle_set.candles.iter() {
                 output_str += &self.render_candle(candle, y.into(), &chart.y_axis);
+            }
+        }
+
+        if chart.volume_pane.enabled {
+            for y in (1..chart.volume_pane.height + 1).rev() {
+                output_str += "\n";
+
+                output_str += &chart.y_axis.render_empty();
+
+                for candle in chart_data.visible_candle_set.candles.iter() {
+                    output_str += &chart.volume_pane.render(candle, y);
+                }
             }
         }
 

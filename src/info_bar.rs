@@ -36,15 +36,22 @@ impl InfoBar {
         }
         .to_string();
 
+        let variation_output = if main_set.variation > 0.0 {
+            ("↖", "green")
+        } else {
+            ("↙", "red")
+        };
+
         output_str += &format!(
-            "{:>width$} | Price: {price} | Highest: {high} | Lowest: {low} | Var.: {var} | Avg.: {avg} │",
+            "{:>width$} | Price: {price} | Highest: {high} | Lowest: {low} | Var.: {var} | Avg.: {avg} │ Cum. Vol: {vol}",
             &self.name,
             width = YAxis::WIDTH as usize + 3,
-            high = format!("{:.2}", main_set.max_value).green().bold(),
-            low = format!("{:.2}", main_set.min_value).red().bold(),
-            var = format!("↗ {:>+.2}%", main_set.variation).green().bold(),
+            high = format!("{:.2}", main_set.max_price).green().bold(),
+            low = format!("{:.2}", main_set.min_price).red().bold(),
+            var = format!("{} {:>+.2}%", variation_output.0, main_set.variation).color(variation_output.1).bold(),
             avg = avg_format,
             price = format!("{:.2}", main_set.last_price).green().bold(),
+            vol = format!("{:.0}", main_set.cumulative_volume).green().bold(),
         );
 
         output_str

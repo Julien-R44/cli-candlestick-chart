@@ -60,7 +60,12 @@ fn main() {
     // Set customs colors
     chart.set_bear_color(1, 205, 254);
     chart.set_bull_color(255, 107, 153);
+    chart.set_vol_bull_color(1, 205, 254);
+    chart.set_vol_bear_color(255, 107, 153);
 
+    chart.set_volume_pane_height(6);
+    chart.set_volume_pane_enabled(false);
+    
     chart.draw();
 }
 ```
