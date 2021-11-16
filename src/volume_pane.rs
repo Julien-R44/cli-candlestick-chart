@@ -45,9 +45,9 @@ impl VolumePane {
         let volume = candle.volume.unwrap_or_default();
 
         let volume_percent_of_max = volume / max_volume;
-        let b = volume_percent_of_max * self.height as f64;
+        let ratio = volume_percent_of_max * self.height as f64;
 
-        if y < b.floor() as i64 {
+        if y < ratio.ceil() as i64 {
             return self.colorize(&candle.get_type(), &self.unicode_fill.to_string());
         }
 
