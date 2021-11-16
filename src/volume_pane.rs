@@ -1,4 +1,4 @@
-use crate::{chart_data::ChartData, Candle, CandleType};
+use crate::{chart::CandleType, chart_data::ChartData, Candle};
 use colored::Colorize;
 use std::{cell::RefCell, rc::Rc};
 

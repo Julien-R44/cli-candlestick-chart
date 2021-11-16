@@ -16,7 +16,7 @@ pub struct Candle {
     pub timestamp: Option<i64>,
 }
 
-pub enum CandleType {
+pub(crate) enum CandleType {
     Bearish,
     Bullish,
 }
@@ -41,7 +41,7 @@ impl Candle {
         }
     }
 
-    pub fn get_type(&self) -> CandleType {
+    pub(crate) fn get_type(&self) -> CandleType {
         match self.open < self.close {
             true => CandleType::Bullish,
             false => CandleType::Bearish,
