@@ -2,7 +2,7 @@
     <img src="https://i.imgur.com/dxLBSkD.png" />
     <br/>
     <br/>
-    <b>Draw candlesticks charts right into your terminal.</b>
+    <b>Draw candlesticks charts right into your terminal. 📈</b>
     <br/>
     <br/>
     <a href="https://github.com/Julien-R44/cli-candlestick-chart/actions/workflows/rust.yml">
