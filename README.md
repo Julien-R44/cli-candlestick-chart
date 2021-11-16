@@ -8,6 +8,9 @@
     <a href="https://github.com/Julien-R44/cli-candlestick-chart/actions/workflows/rust.yml">
         <img src="https://github.com/Julien-R44/cli-candlestick-chart/actions/workflows/rust.yml/badge.svg?branch=main" />
     </a>
+    <a href="https://docs.rs/cli-candlestick-chart">
+         <img src="https://img.shields.io/docsrs/cli-candlestick-chart">
+    </a>
     <a href="https://crates.io/crates/cli-candlestick-chart">
         <img src="https://img.shields.io/crates/v/cli-candlestick-chart.svg" />
     </a>
@@ -17,7 +20,7 @@
 </div>
 
 
-![](https://raw.githubusercontent.com/Julien-R44/cli-candlestick-chart/main/docs/capture2.png)
+![](https://i.imgur.com/J970jfL.png)
 
 * [Features](#features)
 * [API Usage](#api-usage)
