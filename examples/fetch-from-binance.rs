@@ -43,9 +43,9 @@ fn main() -> Result<(), Box<dyn Error>> {
     chart.set_bear_color(255, 107, 153);
     chart.set_vol_bull_color(1, 205, 254);
     chart.set_vol_bear_color(255, 107, 153);
-    chart.set_volume_pane_height(5);
-    chart.set_volume_pane_enabled(true);
-    chart.set_volume_pane_unicode_fill('🚀');
+    chart.set_volume_pane_height(15);
+    chart.set_volume_pane_enabled(false);
+    // chart.set_volume_pane_unicode_fill(true);
 
     chart.draw();
 
