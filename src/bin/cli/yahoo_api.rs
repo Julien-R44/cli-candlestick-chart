@@ -34,10 +34,11 @@ pub fn get_yahoo_klines(symbol: &str, interval: &str) -> Vec<Candle> {
     let client = reqwest::blocking::get(url.as_str()).unwrap();
     let value: serde_json::Value = serde_json::from_str(client.text().unwrap().as_str()).unwrap();
 
-    let nb_candles = value["chart"]["result"][0]["timestamp"]
+    let timestamps = value["chart"]["result"][0]["timestamp"]
         .as_array()
-        .expect("Ticker seems to be invalid.")
-        .len();
+        .expect("Tickers seems to be invalid.");
+
+    let nb_candles = timestamps.len();
 
     let mut candles: Vec<Candle> = Vec::new();
     for i in 0..nb_candles {
@@ -47,12 +48,16 @@ pub fn get_yahoo_klines(symbol: &str, interval: &str) -> Vec<Candle> {
         let high = base["high"][i].as_f64().unwrap();
         let low = base["low"][i].as_f64().unwrap();
         let close = base["close"][i].as_f64().unwrap();
+        let volume = base["volume"][i].as_f64().unwrap();
+        let timestamp = timestamps[i].as_i64().unwrap();
 
         let candle = Candle::new(
             open.to_owned(),
             high.to_owned(),
             low.to_owned(),
             close.to_owned(),
+            Some(volume.to_owned()),
+            Some(timestamp.to_owned()),
         );
         candles.push(candle);
     }
