@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://i.imgur.com/dxLBSkD.png" />
+    <img src="https://i.imgur.com/4HvhY8r.png" />
     <br/>
     <br/>
     <b>Draw candlesticks charts right into your terminal. 📈</b>
