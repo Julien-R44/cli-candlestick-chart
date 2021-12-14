@@ -49,10 +49,6 @@ fn main() {
 
     let mut chart = Chart::new(&candles);
 
-    if !options.ticker.is_none() && options.mode == CandlesRetrievalMode::Yahoo {
-        chart.set_name(options.ticker.unwrap().to_string());
-    }
-
     if let Some(chart_name) = options.chart_name {
         chart.set_name(chart_name);
     }
