@@ -4,7 +4,6 @@ use clap::{App, Arg};
 pub enum CandlesRetrievalMode {
     Stdin,
     CsvFile,
-    Yahoo,
 }
 
 pub struct CliOptions {
@@ -13,8 +12,6 @@ pub struct CliOptions {
     pub chart_name: Option<String>,
     pub bear_color: Option<String>,
     pub bull_color: Option<String>,
-    pub ticker: Option<String>,
-    pub interval: String,
 }
 
 pub fn get_args() -> CliOptions {
@@ -26,7 +23,7 @@ pub fn get_args() -> CliOptions {
                 .short("m")
                 .long("mode")
                 .help("Select the method for retrieving the candles.")
-                .possible_values(&["stdin", "csv-file", "json-file", "yahoo-fetch"])
+                .possible_values(&["stdin", "csv-file", "json-file"])
                 .takes_value(true)
                 .required(true),
         )
@@ -55,35 +52,14 @@ pub fn get_args() -> CliOptions {
                 .help("Sets the ascending candles color in hexadecimal.")
                 .takes_value(true),
         )
-        .arg(
-            Arg::with_name("TICKER")
-                .long("ticker")
-                .takes_value(true)
-                .required_if("MODE", "yahoo-fetch")
-                .help("[MODE:*-fetch] The broker-side ticker of the asset you want to plot."),
-        )
-        .arg(
-            Arg::with_name("INTERVAL")
-                .long("interval")
-                .default_value("1d")
-                .possible_values(&[
-                    "1m", "2m", "5m", "15m", "30m", "60m", "90m", "1h", "1d", "5d", "1wk", "1mo",
-                    "3mo",
-                ])
-                .takes_value(true)
-                .help("[MODE:*-fetch] The interval you want to retrieve the candles from the API"),
-        )
         .get_matches();
 
     return CliOptions {
         mode: match matches.value_of("MODE").unwrap() {
             "stdin" => CandlesRetrievalMode::Stdin,
             "csv-file" => CandlesRetrievalMode::CsvFile,
-            "yahoo-fetch" => CandlesRetrievalMode::Yahoo,
             _ => panic!("Invalid reading mode."),
         },
-        interval: matches.value_of("INTERVAL").unwrap().to_string(),
-        ticker: matches.value_of("TICKER").map(|s| s.to_string()),
         file_path: matches.value_of("FILE").map(|s| s.to_string()),
         chart_name: matches.value_of("CHART_NAME").map(|s| s.to_string()),
         bear_color: matches.value_of("BEAR_COLOR").map(|s| s.to_string()),

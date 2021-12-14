@@ -32,7 +32,6 @@
 - Auto-fit to terminal size
 - Shipped as library with simple API
 - Shipped as binary for standalone usage
-- Can fetch charts from Yahoo Finance.
 
 # API Usage
 Add this to your `Cargo.toml`
@@ -88,16 +87,9 @@ OPTIONS:
         --bear-color <BEAR_COLOR>    Sets the descending candles color in hexadecimal.
         --bull-color <BULL_COLOR>    Sets the ascending candles color in hexadecimal.
         --chart-name <CHART_NAME>    Sets the chart name.
-    -f, --file <FILE>                [MODE:*-file] File to read candles from.`
-    
-        --interval <INTERVAL>        [MODE:*-fetch] The interval you want to retrieve the candles from the API 
-                                     [default: 1d]  
-                                     [possible values: 1m, 2m, 5m, 15m, 30m, 60m, 90m, 1h, 1d, 5d, 1wk, 1mo, 3mo]
-
+    -f, --file <FILE>                [MODE:*-file] File to read candles from.`   
     -m, --mode <MODE>                Select the method for retrieving the candles. 
-                                     [possible values: stdin, csv-file, json-file, yahoo-fetch]
-
-    --ticker <TICKER>                [MODE:*-fetch] The broker-side ticker of the asset you want to plot.
+                                     [possible values: stdin, csv-file, json-file]
 ```
 When requesting the CSV file mode, the library expects a CSV file with `open,high,low,close` headers fields.
 
@@ -151,12 +143,4 @@ echo '[
     --chart-name="My BTC Chart" \
     --bear-color="#b967ff" \
     --bull-color="ff6b99"
-```
-
-- Fetch from Yahoo Finance :
-```bash
-./cli-candlestick-chart \
-    --mode=yahoo-fetch \
-    --ticker=UBER
-    --interval=1d
 ```

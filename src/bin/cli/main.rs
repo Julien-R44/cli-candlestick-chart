@@ -8,9 +8,6 @@ use utils::hexa_to_rgb;
 mod get_args;
 use get_args::{get_args, CandlesRetrievalMode};
 
-mod yahoo_api;
-use yahoo_api::get_yahoo_klines;
-
 fn parse_candles_from_stdin() -> Vec<Candle> {
     let stdin = io::stdin();
 
@@ -47,9 +44,6 @@ fn main() {
         CandlesRetrievalMode::CsvFile => {
             let filepath = options.file_path.expect("No file path provided.");
             candles = parse_candles_from_csv(&filepath).unwrap();
-        }
-        CandlesRetrievalMode::Yahoo => {
-            candles = get_yahoo_klines(&options.ticker.to_owned().unwrap(), &options.interval);
         }
     };
 
