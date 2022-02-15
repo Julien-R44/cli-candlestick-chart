@@ -100,7 +100,8 @@ When requesting the JSON or stdin mode, the library expects a JSON with the foll
     "open": 28994.009766,
     "high": 29600.626953,
     "low": 28803.585938,
-    "close": 29374.152344
+    "close": 29374.152344,
+    "volume": 13456 // Optional 
   },
   ...
 ]
