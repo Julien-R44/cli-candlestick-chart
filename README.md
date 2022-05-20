@@ -145,3 +145,7 @@ echo '[
     --bear-color="#b967ff" \
     --bull-color="ff6b99"
 ```
+
+## Other versions
+
+If you prefer Python, there is a port of the library, developed by [BoboTiG](https://github.com/BoboTiG), right there : https://github.com/BoboTiG/py-candlestick-chart
