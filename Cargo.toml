@@ -20,10 +20,13 @@ serde = { version = "1", features = ["derive"], optional = true }
 clap = { version = "2.33.3", optional = true }
 serde_json = { version = "1.0.1", optional = true }
 csv = { version = "1.1", optional = true }
-reqwest = { version = "0.11", features = ["blocking", "json"], optional = true }
 
 [dev-dependencies]
+ansi-parser = "0.8.0"
+crossterm = "0.23.2"
 reqwest = { version = "0.11", features = ["blocking", "json"] }
+tui = "0.18.0"
+unicode-width = "0.1.9"
 
 [features]
 bin-app = ["serde", "serde_json", "csv", "clap"]
@@ -40,4 +43,7 @@ required-features = ["serde", "csv"]
 
 [[example]]
 name = "fetch-from-binance"
-required-features = ["serde", "reqwest"]
+required-features = ["serde"]
+
+[[example]]
+name = "tui-renderer"
