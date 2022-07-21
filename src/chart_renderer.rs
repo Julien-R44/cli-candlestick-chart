@@ -86,7 +86,7 @@ impl ChartRenderer {
         }
     }
 
-    pub fn render(&self, chart: &Chart) {
+    pub fn render(&self, chart: &Chart) -> String {
         let mut output_str = "".to_owned();
 
         let mut chart_data = chart.chart_data.borrow_mut();
@@ -119,7 +119,7 @@ impl ChartRenderer {
 
         output_str += &chart.info_bar.render();
 
-        println!("{}", output_str)
+        output_str
     }
 }
 

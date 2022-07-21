@@ -88,9 +88,14 @@ impl Chart {
         }
     }
 
+    /// Renders the chart to multiline string
+    pub fn render(&self) -> String {
+        self.renderer.render(self)
+    }
+
     /// Draws the chart by outputting multiples strings in the terminal.
     pub fn draw(&self) {
-        self.renderer.render(self);
+        println!("{}", self.render());
     }
 
     /// Set the name of the chart in the info bar.
