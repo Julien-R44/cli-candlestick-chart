@@ -29,14 +29,12 @@ impl ChartRenderer {
         }
     }
 
-    fn colorize(&self, candle_type: &CandleType, string: &str) -> String {
-        let (ar, ag, ab) = self.bearish_color;
-        let (br, bg, bb) = self.bullish_color;
-
-        match candle_type {
-            CandleType::Bearish => format!("{}", string.truecolor(ar, ag, ab)),
-            CandleType::Bullish => format!("{}", string.truecolor(br, bg, bb)),
-        }
+    fn colorize(&self, candle_type: CandleType, string: &str) -> String {
+        let (r, g, b) = match candle_type {
+            CandleType::Bearish => self.bearish_color,
+            CandleType::Bullish => self.bullish_color,
+        };
+        string.truecolor(r, g, b).to_string()
     }
 
     fn render_candle(&self, candle: &Candle, y: i32, y_axis: &YAxis) -> String {
@@ -80,9 +78,12 @@ impl ChartRenderer {
             }
         }
 
-        let candle_type = candle.get_type();
-
-        self.colorize(&candle_type, &output.to_string())
+        if output == ChartRenderer::UNICODE_VOID {
+            output.to_string()
+        } else {
+            let mut tmp = [0; 4];
+            self.colorize(candle.get_type(), output.encode_utf8(&mut tmp))
+        }
     }
 
     pub fn render(&self, chart: &Chart) {

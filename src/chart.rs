@@ -16,6 +16,7 @@ pub struct Candle {
     pub timestamp: Option<i64>,
 }
 
+#[derive(Copy, Clone, Debug)]
 pub(crate) enum CandleType {
     Bearish,
     Bullish,
