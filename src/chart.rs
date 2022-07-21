@@ -58,9 +58,16 @@ pub struct Chart {
 }
 
 impl Chart {
+    #[cfg(feature = "terminal_size")]
     pub fn new(candles: &[Candle]) -> Self {
+        let (terminal_size::Width(w), terminal_size::Height(h)) =
+            terminal_size::terminal_size().unwrap();
+        Self::new_with_size(candles.to_vec(), (w, h))
+    }
+
+    pub fn new_with_size(candles: Vec<Candle>, size: (u16, u16)) -> Self {
         let renderer = ChartRenderer::new();
-        let chart_data = Rc::new(RefCell::new(ChartData::new(candles.to_vec())));
+        let chart_data = Rc::new(RefCell::new(ChartData::new(candles, size)));
         let y_axis = YAxis::new(chart_data.clone());
         let info_bar = InfoBar::new("APPLE".to_string(), chart_data.clone());
 

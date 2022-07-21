@@ -14,8 +14,8 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-terminal_size = "0.1.17"
 colored = "2"
+terminal_size = { version = "0.1.17", optional = true }
 serde = { version = "1", features = ["derive"], optional = true }
 clap = { version = "2.33.3", optional = true }
 serde_json = { version = "1.0.1", optional = true }
@@ -27,6 +27,7 @@ reqwest = { version = "0.11", features = ["blocking", "json"] }
 
 [features]
 bin-app = ["serde", "serde_json", "csv", "clap"]
+default = ["terminal_size"]
 
 [[bin]]
 name = "cli-candlestick-chart"

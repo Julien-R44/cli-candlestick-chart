@@ -35,15 +35,12 @@ fn parse_candles_from_csv(filepath: &str) -> Result<Vec<Candle>, Box<dyn Error>>
 
 fn main() {
     let options = get_args();
-    let mut candles: Vec<Candle> = Vec::new();
 
-    match options.mode {
-        CandlesRetrievalMode::Stdin => {
-            candles = parse_candles_from_stdin();
-        }
+    let candles = match options.mode {
+        CandlesRetrievalMode::Stdin => parse_candles_from_stdin(),
         CandlesRetrievalMode::CsvFile => {
             let filepath = options.file_path.expect("No file path provided.");
-            candles = parse_candles_from_csv(&filepath).unwrap();
+            parse_candles_from_csv(&filepath).unwrap()
         }
     };
 

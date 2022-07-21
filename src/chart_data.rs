@@ -2,7 +2,6 @@ use crate::{
     candle_set::CandleSet, chart::Candle, chart_renderer::ChartRenderer, info_bar::InfoBar,
     volume_pane::VolumePane, y_axis::YAxis,
 };
-use terminal_size::terminal_size;
 
 #[derive(Debug, Clone)]
 pub struct ChartData {
@@ -13,14 +12,12 @@ pub struct ChartData {
 }
 
 impl ChartData {
-    pub fn new(candles: Vec<Candle>) -> ChartData {
-        let (w, h) = terminal_size().unwrap();
-
+    pub fn new(candles: Vec<Candle>, (w, h): (u16, u16)) -> Self {
         let mut chart_data = ChartData {
             main_candle_set: CandleSet::new(candles),
             visible_candle_set: CandleSet::new(Vec::new()),
-            terminal_size: (w.0, h.0),
-            height: h.0 as i64,
+            terminal_size: (w, h),
+            height: h as i64,
         };
 
         chart_data.compute_visible_candles();
