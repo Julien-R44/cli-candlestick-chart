@@ -30,14 +30,12 @@ impl VolumePane {
         }
     }
 
-    fn colorize(&self, candle_type: &CandleType, string: &str) -> String {
-        let (ar, ag, ab) = self.bearish_color;
-        let (br, bg, bb) = self.bullish_color;
-
-        match candle_type {
-            CandleType::Bearish => format!("{}", string.truecolor(ar, ag, ab)),
-            CandleType::Bullish => format!("{}", string.truecolor(br, bg, bb)),
-        }
+    fn colorize(&self, candle_type: CandleType, string: &str) -> String {
+        let (r, g, b) = match candle_type {
+            CandleType::Bearish => self.bearish_color,
+            CandleType::Bullish => self.bullish_color,
+        };
+        string.truecolor(r, g, b).to_string()
     }
 
     pub fn render(&self, candle: &Candle, y: i64) -> String {
@@ -48,11 +46,11 @@ impl VolumePane {
         let ratio = volume_percent_of_max * self.height as f64;
 
         if y < ratio.ceil() as i64 {
-            return self.colorize(&candle.get_type(), &self.unicode_fill.to_string());
+            return self.colorize(candle.get_type(), &self.unicode_fill.to_string());
         }
 
         if y == 1 && self.unicode_fill == '┃' {
-            return self.colorize(&candle.get_type(), "╻");
+            return self.colorize(candle.get_type(), "╻");
         }
 
         " ".to_string()
