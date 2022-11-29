@@ -37,7 +37,7 @@
 Add this to your `Cargo.toml`
 ```toml
 [dependencies]
-cli-candlestick-chart = "0.3"
+cli-candlestick-chart = "0.4"
 ```
 
 ```rust
@@ -46,11 +46,11 @@ use cli_candlestick_chart::{Candle, Chart};
 fn main() {
     // Add some candles
     let candles: Vec<Candle> = vec![
-        Candle::new(133.520004, 133.610001, 126.760002, 129.410004),
-        Candle::new(128.889999, 131.740005, 128.429993, 131.009995),
-        Candle::new(127.720001, 131.050003, 126.379997, 126.599998),
-        Candle::new(128.360001, 131.630005, 127.860001, 130.919998),
-        Candle::new(132.429993, 132.630005, 130.229996, 132.050003),
+        Candle::new(133.520004, 133.610001, 126.760002, 129.410004, None, None),
+        Candle::new(128.889999, 131.740005, 128.429993, 131.009995, None, None),
+        Candle::new(127.720001, 131.050003, 126.379997, 126.599998, None, None),
+        Candle::new(128.360001, 131.630005, 127.860001, 130.919998, None, None),
+        Candle::new(132.429993, 132.630005, 130.229996, 132.050003, None, None),
     ];
 
     // Create and display the chart
